@@ -18,5 +18,17 @@ namespace App.Orchestrator
             resp.EnsureSuccessStatusCode();
             return await resp.Content.ReadAsStringAsync();
         }
+
+        // em AlphaVantageApi.cs, logo abaixo de GetGlobalQuoteAsync
+        public async Task<string> GetDailyTimeSeriesAsync(string symbol)
+        {
+            // agora usamos TIME_SERIES_DAILY (gratuito)
+            var url =
+            $"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY" +
+            $"&symbol={symbol}&outputsize=full&apikey={_apiKey}";
+            var resp = await client.GetAsync(url);
+            resp.EnsureSuccessStatusCode();
+            return await resp.Content.ReadAsStringAsync();
+        }
     }
 }
