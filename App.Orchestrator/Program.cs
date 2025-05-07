@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json.Linq;
+using DotNetEnv;
 
 namespace App.Orchestrator
 {
@@ -14,6 +15,7 @@ namespace App.Orchestrator
 
         static async Task Main()
         {
+            Env.Load();
             try
             {
                 var api = new AlphaVantageApi(GetApiKey());

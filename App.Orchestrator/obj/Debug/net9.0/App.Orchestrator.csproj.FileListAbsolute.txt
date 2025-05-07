@@ -46,3 +46,7 @@
 /Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/Microsoft.Net.Http.Headers.dll
 /Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/NodaTime.dll
 /Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/NodaTime.Serialization.SystemTextJson.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/DotNetEnv.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/Microsoft.Extensions.Configuration.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/App.Orchestrator/bin/Debug/net9.0/Sprache.dll

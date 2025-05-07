@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AlphaVantage.Net.Stocks" Version="2.0.2" />
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="YahooFinanceApi" Version="2.3.3" />
   </ItemGroup>
