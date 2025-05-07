@@ -1,0 +1,14 @@
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/bin/Debug/net9.0/Library.Func.deps.json
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/bin/Debug/net9.0/Library.Func.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/bin/Debug/net9.0/Library.Func.pdb
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/bin/Debug/net9.0/Library.Func.xml
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.fsproj.AssemblyReference.cache
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.AssemblyInfoInputs.cache
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.AssemblyInfo.fs
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.fsproj.CoreCompileInputs.cache
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.sourcelink.json
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/refint/Library.Func.dll
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.xml
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/Library.Func.pdb
+/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/Debug/net9.0/ref/Library.Func.dll

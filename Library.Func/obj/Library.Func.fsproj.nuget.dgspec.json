@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/Library.Func.fsproj": {}
+  },
+  "projects": {
+    "/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/Library.Func.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/Library.Func.fsproj",
+        "projectName": "Library.Func",
+        "projectPath": "/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/Library.Func.fsproj",
+        "packagesPath": "/Users/pedropertusi/.nuget/packages/",
+        "outputPath": "/Users/pedropertusi/Desktop/prog-func/portifolio-optimization/Library.Func/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pedropertusi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/Cellar/dotnet/9.0.4/libexec/library-packs": {},
+          "/usr/local/Cellar/dotnet/9.0.4/libexec/sdk/9.0.105/FSharp/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[9.0.101, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/9.0.4/libexec/sdk/9.0.105/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
