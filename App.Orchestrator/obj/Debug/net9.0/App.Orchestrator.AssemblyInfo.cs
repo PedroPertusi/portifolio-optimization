@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("App.Orchestrator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+60e2403eba235049db31beae950f71ce8c70e837")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c195fd7d42c336f6a61ff9d2ce1987d608802b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("App.Orchestrator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("App.Orchestrator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
