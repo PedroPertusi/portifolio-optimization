@@ -12,18 +12,38 @@ namespace App.Orchestrator
         private static readonly DateTime StartDate = new(2024, 8, 1);
         private static readonly DateTime EndDate = new(2024, 12, 31);
         private const string Symbol = "AAPL";
+        static readonly string[] dow30 = new[]
+        {
+            "AAPL","AMGN","AXP","BA","CAT","CRM","CSCO","CVX","DIS","DOW",
+            "GS","HD","HON","IBM","INTC","JNJ","JPM","KO","MCD","MMM",
+            "MRK","MSFT","NKE","PG","TRV","UNH","V","VZ","WBA","WMT"
+        };
 
         static async Task Main()
         {
             Env.Load();
             try
             {
+                var jsonResults = new List<string>();
+                var allStocks = new List<List<EquityPrice>>();
                 var api = new AlphaVantageApi(GetApiKey());
-                var json = await api.GetDailyTimeSeriesAsync(Symbol);
-                var prices = ParseDailySeries(json);
 
-                Console.WriteLine($"{prices.Count} dias retornados para {Symbol}:");
-                PrintPrices(prices);
+                foreach (var stock in dow30)
+                {
+                    jsonResults.Add(await api.GetDailyTimeSeriesAsync(stock));
+                }
+
+                foreach (var json in jsonResults) {
+                    allStocks.Add(ParseDailySeries(json));
+                }
+                
+
+                for (int i = 0; i < dow30.Length; i++) {
+                    var ticker = dow30[i];
+                    var series = allStocks[i];
+                    Console.WriteLine($"{series.Count} dias retornados para {ticker}:");
+                    PrintPrices(series);
+                }
             }
             catch (Exception ex)
             {
