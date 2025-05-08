@@ -38,8 +38,8 @@ module Portfolio =
         stdDev * sqrt 252.0
 
     /// (annualReturn - rf) / annualVolatility
-    let sharpeRatio (annualReturn: float) (annualVol: float) (rf: float) : float =
-      (annualReturn - rf) / annualVol
+    let sharpeRatio (annualReturn: float) (annualVol: float): float =
+        annualReturn / annualVol
 
     open System
 

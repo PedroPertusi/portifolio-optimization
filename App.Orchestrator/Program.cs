@@ -1,73 +1,88 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Diagnostics;       // for Stopwatch
+using System.Collections.Generic;
 using Library.Func;
-using Microsoft.FSharp.Collections;
 
 namespace App.Orchestrator
 {
     class Program
     {
-        static readonly DateTime StartDate = new(2024, 8, 1);
-        static readonly DateTime EndDate   = new(2024, 12, 31);
+        static readonly DateTime StartDate = new DateTime(2024, 8, 1);
+        static readonly DateTime EndDate   = new DateTime(2024, 12, 31);
         static readonly string[] Dow30     = {
-            "AAPL","AMGN","AXP","BA","CAT","CRM","CSCO","CVX","DIS","DOW",
-            "GS","HD","HON","IBM","INTC","JNJ","JPM","KO","MCD","MMM",
-            "MRK","MSFT","NKE","PG","TRV","UNH","V","VZ","WBA","WMT"
+            "AAPL","AMGN","AMZN","AXP","BA","CAT","CRM","CSCO","CVX","DIS",
+            "GS","HD","HON","IBM","JNJ","JPM","KO","MCD","MMM","MRK",
+            "MSFT","NKE","NVDA","PG","SHW","TRV","UNH","V","VZ","WMT"
         };
 
         static async Task Main()
         {
+            // 1) Fetch or load all price data
             var service   = new StockDataService(Dow30, StartDate, EndDate, "../data/dow30.csv");
             var allStocks = await service.FetchOrLoadAsync();
 
-            if (!allStocks.TryGetValue("AAPL", out var aapl) ||
-                !allStocks.TryGetValue("MSFT", out var msft))
-            {
-                Console.WriteLine("Could not find both AAPL and MSFT in the data.");
-                return;
-            }
+            // 2) Filter valid tickers
+            var validTickers = Dow30.Where(t => allStocks.ContainsKey(t)).ToArray();
+            var missing      = Dow30.Except(Dow30).ToArray();
+            if (missing.Length > 0)
+                Console.WriteLine($"Warning: Missing data for {missing.Length} tickers: {string.Join(", ", missing)}");
 
-            // ─── PORTFOLIO METRICS TEST ───────────────────────────────────
-            Console.WriteLine("=== Portfolio Metrics Test (60% AAPL / 40% MSFT) ===");
+            // 3) Build the daily returns matrix (days × valid assets)
+            var dailyReturnsList = Dow30.Select(ticker => Portfolio.dailyReturns(allStocks[ticker]
+                                    .Select(ep => ep.Price).ToArray())).ToArray();
 
-            var aaplPrices = aapl.Select(ep => ep.Price).ToArray();
-            var msftPrices = msft.Select(ep => ep.Price).ToArray();
-            var aaplRet    = Portfolio.dailyReturns(aaplPrices);
-            var msftRet    = Portfolio.dailyReturns(msftPrices);
-
-            double[][] returnsMatrix = aaplRet
-                .Select((r, i) => new[] { r, msftRet[i] })
+            int days = dailyReturnsList[0].Length;
+            double[][] returnsMatrix = Enumerable.Range(0, days)
+                .Select(d => dailyReturnsList.Select(arr => arr[d]).ToArray())
                 .ToArray();
 
-            double[] fixedWeights = { 0.6, 0.4 };
-            double[] portRets     = Portfolio.portfolioDailyReturn(returnsMatrix, fixedWeights);
+            // 4) Simulation parameters
+            int assetCount = Dow30.Length;
+            int comboSize  = 25;
+            int comboLimit = 10;    // or int.MaxValue for all combos
+            double maxPct  = 0.20;     // 20% cap per asset
 
-            var annRet = Portfolio.annualizedReturn(portRets);
-            var annVol = Portfolio.annualizedVolatility(portRets);
-            var sharpe = Portfolio.sharpeRatio(annRet, annVol, 0.02);
+            // 5) Run & time the simulation
+            var sw = Stopwatch.StartNew();
+            var results = PortfolioSimulation.simulateSomeCombinations(
+                returnsMatrix,
+                assetCount,
+                comboSize,
+                comboLimit,
+                maxPct
+            );
 
-            Console.WriteLine($"Annualized Return:    {annRet:P2}");
-            Console.WriteLine($"Annualized Volatility:{annVol:P2}");
-            Console.WriteLine($"Sharpe Ratio (@2%):   {sharpe:F2}");
+            // 6) Write detailed CSV blocks
+            var resultsDir = Path.Combine("..", "results");
+            Directory.CreateDirectory(resultsDir);
+            var csvPath = Path.Combine(resultsDir, "bestPortfolios.csv");
 
-            // ─── COMBINATIONS TEST ───────────────────────────────────────
-            Console.WriteLine("\n=== Combinations Test (2 of [a, b, c, d]) ===");
-            var items  = ListModule.OfSeq<string>(new[] { "a", "b", "c", "d" });
-            var combos = Portfolio.combinations(2, items);
-            foreach (var combo in combos)
+            var csvLines = new List<string>();
+            foreach (var r in results)
             {
-                // FSharpList<string> implements IEnumerable<string>
-                Console.WriteLine($"[ {string.Join(", ", combo)} ]");
+                var string_line = new string("");
+                // 25 lines: "TICKER = 15.3%"
+                for (int i = 0; i < r.Combination.Count(); i++)
+                {
+                    var ticker = Dow30[r.Combination[i]];
+                    var weight = r.BestWeights[i];
+                    string_line += $"{ticker} = {weight * 100:0.0}%;";
+                    // csvLines.Add($"{ticker} = {weight:P1}");
+                }
+                // 26th line: Sharpe
+                string_line += $"Sharpe = {r.BestSharpe:0.000}";
+
+                csvLines.Add(string_line);
             }
 
-            // ─── GENERATE WEIGHTS TEST ────────────────────────────────────
-            Console.WriteLine("\n=== GenerateWeights Test (n=4, maxPct=0.5) ===");
-            var rng           = new Random(42);
-            var randomWeights = Portfolio.generateWeights(4, 0.5, rng);
-            Console.WriteLine("Weights: " + string.Join(", ", randomWeights.Select(w => w.ToString("P2"))));
-            Console.WriteLine($"Sum: {randomWeights.Sum():F3}");
+            File.WriteAllLines(csvPath, csvLines);
+            Console.WriteLine($"Wrote detailed portfolios to {csvPath}");
+
+            sw.Stop();
+            Console.WriteLine($"\nSimulation took: {sw.Elapsed.TotalSeconds:F0} seconds");
         }
     }
 }
