@@ -24,12 +24,6 @@ namespace App.Orchestrator
             var service   = new StockDataService(Dow30, StartDate, EndDate, "../data/dow30.csv");
             var allStocks = await service.FetchOrLoadAsync();
 
-            // 2) Filter valid tickers
-            var validTickers = Dow30.Where(t => allStocks.ContainsKey(t)).ToArray();
-            var missing      = Dow30.Except(Dow30).ToArray();
-            if (missing.Length > 0)
-                Console.WriteLine($"Warning: Missing data for {missing.Length} tickers: {string.Join(", ", missing)}");
-
             // 3) Build the daily returns matrix (days × valid assets)
             var dailyReturnsList = Dow30.Select(ticker => Portfolio.dailyReturns(allStocks[ticker]
                                     .Select(ep => ep.Price).ToArray())).ToArray();
@@ -42,7 +36,7 @@ namespace App.Orchestrator
             // 4) Simulation parameters
             int assetCount = Dow30.Length;
             int comboSize  = 25;
-            int comboLimit = 10;    // or int.MaxValue for all combos
+            int comboLimit = 142506; // 142,506 combinations of 25 from 30
             double maxPct  = 0.20;     // 20% cap per asset
 
             // 5) Run & time the simulation
@@ -58,7 +52,7 @@ namespace App.Orchestrator
             // 6) Write detailed CSV blocks
             var resultsDir = Path.Combine("..", "results");
             Directory.CreateDirectory(resultsDir);
-            var csvPath = Path.Combine(resultsDir, "bestPortfolios.csv");
+            var csvPath = Path.Combine(resultsDir, "test_bestPortfolios.csv");
 
             var csvLines = new List<string>();
             foreach (var r in results)
@@ -83,6 +77,10 @@ namespace App.Orchestrator
 
             sw.Stop();
             Console.WriteLine($"\nSimulation took: {sw.Elapsed.TotalSeconds:F0} seconds");
+
+            var bestSharpe = PortfolioSimulation.bestSharpeRatio(results);
+            Console.WriteLine($"Best overall Sharpe: {bestSharpe:0.000}");
+
         }
     }
 }

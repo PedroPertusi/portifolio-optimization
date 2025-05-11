@@ -33,7 +33,7 @@ namespace App.Orchestrator
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"⚠️ API failed ({ex.Message}), falling back to CSV");
+                Console.WriteLine($"API failed ({ex.Message}), falling back to CSV");
                 return File.Exists(_csvPath)
                     ? CsvStockProvider.Load(_csvPath)
                     : new Dictionary<string, List<EquityPrice>>();
