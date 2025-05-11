@@ -52,6 +52,11 @@
  Result of simulating a given combination of assets
 </summary>
 </member>
+<member name="M:Library.Func.PortfolioSimulation.bestSharpeRatio(Microsoft.FSharp.Collections.FSharpList{Library.Func.PortfolioSimulation.SimulationResult})">
+<summary>
+ Returns the highest Sharpe ratio among a list of SimulationResult.
+</summary>
+</member>
 <member name="M:Library.Func.PortfolioSimulation.simulateSomeCombinations(System.Double[][],System.Int32,System.Int32,System.Int32,System.Double)">
 <summary>
  Simulates a limited number of combinations in parallel.

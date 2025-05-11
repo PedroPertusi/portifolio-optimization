@@ -1,4 +1,5 @@
 namespace Library.Func
+open System
 
 module Portfolio =
     /// Given an array of prices [p0; p1; …; pn],
@@ -40,8 +41,6 @@ module Portfolio =
     /// (annualReturn - rf) / annualVolatility
     let sharpeRatio (annualReturn: float) (annualVol: float): float =
         annualReturn / annualVol
-
-    open System
 
     /// Generates all k-combinations of the input list.
     /// e.g. combinations 2 [1;2;3] = [[1;2]; [1;3]; [2;3]]

@@ -70,3 +70,9 @@ module PortfolioSimulation =
                 BestWeights = bestWeights
             })
         |> Array.toList
+    
+    /// Returns the highest Sharpe ratio among a list of SimulationResult.
+    let bestSharpeRatio (results: SimulationResult list) : float =
+        results
+        |> List.map (fun r -> r.BestSharpe)
+        |> List.max
