@@ -95,6 +95,7 @@ dotnet run
 * **In-sample** (Aug 1 – Dec 31, 2024)
 
   * Finds the combination of 25 Dow 30 stocks with the highest Sharpe after 1,000 random-weight simulations each.
+  * Parallelizes the simulation for each combination of 25 stocks in `Simulate.fs`.
   * Writes **bestPortfolios.csv** (\~142,506 lines).
   * Logs the single best Sharpe and its CSV line to **results.txt**.
 
