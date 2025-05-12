@@ -5,8 +5,7 @@
 <member name="M:Library.Func.Helper.generateWeights(System.Int32,System.Double,System.Random)">
 <summary>
  Generates a random weight vector of length n that sums to 1.0,
- rejecting and retrying any draw where a component &gt; maxPct.
- Uses an exponential-sampling trick to get positive randoms.
+ rejecting any draw where a component &gt; maxPct.
 </summary>
 </member>
 <member name="M:Library.Func.Helper.combinations``1(System.Int32,Microsoft.FSharp.Collections.FSharpList{``0})">
@@ -36,15 +35,17 @@
 <summary>
  Given a matrix of daily returns (days × assets) and a weight vector,
  computes the portfolio’s daily return by doing a dot-product on each day.
- 
- returnsMatrix: an array where each element is an array of returns for all assets on a given day
- weights:       an array of length = number of assets, summing to 1.0
 </summary>
 </member>
 <member name="M:Library.Func.Helper.dailyReturns(System.Double[])">
 <summary>
  Given an array of prices [p0; p1; …; pn],
  returns [r1; …; rn] where rt = pt / p(t-1) - 1
+</summary>
+</member>
+<member name="T:Library.Func.Helper">
+<summary>
+ Pure helper functions for portfolio returns and risk metrics.
 </summary>
 </member>
 <member name="T:Library.Func.Simulate.SimulationResult">
