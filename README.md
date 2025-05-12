@@ -106,7 +106,7 @@ dotnet run
 
 ---
 
-## Graphs (/Results)
+## Graphs (`/Results`)
 *Note: Graphs are generated in the Jupyter notebook `graphs.ipynb`. This are the graphs from the results in /results*
 
 ![alt text](assets/graph1.png)
