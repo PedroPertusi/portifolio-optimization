@@ -2,37 +2,37 @@
 <doc>
 <assembly><name>Library.Func</name></assembly>
 <members>
-<member name="M:Library.Func.Portfolio.generateWeights(System.Int32,System.Double,System.Random)">
+<member name="M:Library.Func.Helper.generateWeights(System.Int32,System.Double,System.Random)">
 <summary>
  Generates a random weight vector of length n that sums to 1.0,
  rejecting and retrying any draw where a component &gt; maxPct.
  Uses an exponential-sampling trick to get positive randoms.
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.combinations``1(System.Int32,Microsoft.FSharp.Collections.FSharpList{``0})">
+<member name="M:Library.Func.Helper.combinations``1(System.Int32,Microsoft.FSharp.Collections.FSharpList{``0})">
 <summary>
  Generates all k-combinations of the input list.
  e.g. combinations 2 [1;2;3] = [[1;2]; [1;3]; [2;3]]
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.sharpeRatio(System.Double,System.Double)">
+<member name="M:Library.Func.Helper.sharpeRatio(System.Double,System.Double)">
 <summary>
  (annualReturn - rf) / annualVolatility
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.annualizedVolatility(System.Double[])">
+<member name="M:Library.Func.Helper.annualizedVolatility(System.Double[])">
 <summary>
  Computes the annualized volatility (standard deviation) given an array of daily returns.
  Formula: stddev(dailyReturns) * sqrt(252.0)
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.annualizedReturn(System.Double[])">
+<member name="M:Library.Func.Helper.annualizedReturn(System.Double[])">
 <summary>
  Computes the annualized return given an array of daily returns.
  Formula: average(dailyReturns) * 252.0
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.portfolioDailyReturn(System.Double[][],System.Double[])">
+<member name="M:Library.Func.Helper.portfolioDailyReturn(System.Double[][],System.Double[])">
 <summary>
  Given a matrix of daily returns (days × assets) and a weight vector,
  computes the portfolio’s daily return by doing a dot-product on each day.
@@ -41,23 +41,23 @@
  weights:       an array of length = number of assets, summing to 1.0
 </summary>
 </member>
-<member name="M:Library.Func.Portfolio.dailyReturns(System.Double[])">
+<member name="M:Library.Func.Helper.dailyReturns(System.Double[])">
 <summary>
  Given an array of prices [p0; p1; …; pn],
  returns [r1; …; rn] where rt = pt / p(t-1) - 1
 </summary>
 </member>
-<member name="T:Library.Func.PortfolioSimulation.SimulationResult">
+<member name="T:Library.Func.Simulate.SimulationResult">
 <summary>
  Result of simulating a given combination of assets
 </summary>
 </member>
-<member name="M:Library.Func.PortfolioSimulation.bestSharpeRatio(Microsoft.FSharp.Collections.FSharpList{Library.Func.PortfolioSimulation.SimulationResult})">
+<member name="M:Library.Func.Simulate.bestSharpeRatio(Microsoft.FSharp.Collections.FSharpList{Library.Func.Simulate.SimulationResult})">
 <summary>
  Returns the highest Sharpe ratio among a list of SimulationResult.
 </summary>
 </member>
-<member name="M:Library.Func.PortfolioSimulation.simulateSomeCombinations(System.Double[][],System.Int32,System.Int32,System.Int32,System.Double)">
+<member name="M:Library.Func.Simulate.simulateSomeCombinations(System.Double[][],System.Int32,System.Int32,System.Int32,System.Double)">
 <summary>
  Simulates a limited number of combinations in parallel.
  - returnsMatrix: daily returns matrix (days × assets)

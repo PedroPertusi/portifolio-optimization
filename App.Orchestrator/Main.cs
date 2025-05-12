@@ -31,7 +31,7 @@ namespace App.Orchestrator
 
             // 2) Build the daily returns matrix (days × valid assets)
             var dailyReturnsList = Dow30
-                .Select(ticker => Portfolio.dailyReturns(
+                .Select(ticker => Helper.dailyReturns(
                     allStocks[ticker].Select(ep => ep.Price).ToArray()))
                 .ToArray();
 
@@ -48,7 +48,7 @@ namespace App.Orchestrator
 
             // 4) Run & time the simulation
             var sw = Stopwatch.StartNew();
-            var results = PortfolioSimulation.simulateSomeCombinations(
+            var results = Simulate.simulateSomeCombinations(
                 returnsMatrix,
                 assetCount,
                 comboSize,
@@ -60,7 +60,7 @@ namespace App.Orchestrator
             // 5) Write detailed CSV blocks
             var resultsDir = Path.Combine("..", "results");
             Directory.CreateDirectory(resultsDir);
-            var csvPath = Path.Combine(resultsDir, "test_bestPortfolios.csv");
+            var csvPath = Path.Combine(resultsDir, "bestPortfolios.csv");
 
             var csvLines = new List<string>();
             foreach (var r in results)
@@ -80,7 +80,7 @@ namespace App.Orchestrator
 
             // 6) Report timing & best Sharpe
             Console.WriteLine($"\nSimulation took: {sw.Elapsed.TotalSeconds:F0} seconds");
-            var bestSharpe = PortfolioSimulation.bestSharpeRatio(results);
+            var bestSharpe = Simulate.bestSharpeRatio(results);
             Console.WriteLine($"Best overall Sharpe: {bestSharpe:0.000}");
         }
     }

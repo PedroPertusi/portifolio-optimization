@@ -1,8 +1,8 @@
 namespace Library.Func
 
-module PortfolioSimulation =
+module Simulate =
     open System
-    open Library.Func.Portfolio
+    open Library.Func.Helper
 
     /// Result of simulating a given combination of assets
     type SimulationResult = {

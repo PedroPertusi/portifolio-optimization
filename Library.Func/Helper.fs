@@ -1,7 +1,7 @@
 namespace Library.Func
 open System
 
-module Portfolio =
+module Helper =
     /// Given an array of prices [p0; p1; …; pn],
     /// returns [r1; …; rn] where rt = pt / p(t-1) - 1
     let dailyReturns (prices: float[]) : float[] =

@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <Compile Include="Library.fs" />
-    <Compile Include="Portfolio.fs" />
-    <Compile Include="PortfolioSimulation.fs" />
+    <Compile Include="Helper.fs" />
+    <Compile Include="Simulate.fs" />
   </ItemGroup>
 
 </Project>
