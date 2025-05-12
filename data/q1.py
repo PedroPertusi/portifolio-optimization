@@ -14,5 +14,3 @@ raw_data = yf.download(tickers, start=start_date, end=end_date)
 close_data = raw_data["Close"]
 
 close_data.to_csv("dow_jones_q1.csv")
-
-print("Somente preços de fechamento salvos em dow_jones_q1.csv")
