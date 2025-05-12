@@ -1,0 +1,8 @@
+
+=== Initial Simulation 2024-08-01 → 2024-12-31 ===
+Best Sharpe (in-sample): 3,552 (CSV line: 92352)
+Wrote detailed portfolios to ../results/bestPortfolios.csv
+Simulation took: 1058 seconds
+
+=== Backtest 2025-01-01 → 2025-03-31 ===
+Sharpe Ratio (Q1 2025): -1,075
